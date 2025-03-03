@@ -1,15 +1,13 @@
 package dev.pseudodistant.pactitude;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 public class PacCommandRunner {
-    private PacOSReader os = new PacOSReader();
-    private PacManager manager;
-    private String[] packages;
+    private final PacOSReader os = new PacOSReader();
+    private final PacManager manager;
+    private final String[] packages;
     private Process pacman;
 
     public PacCommandRunner(String[] args, PacManager manager) {
@@ -32,15 +30,19 @@ public class PacCommandRunner {
                     pw.close();
                     p.waitFor();
                 }
-                if (manager.isUpgrade) {
-                    command = new StringBuilder("apt upgrade");
-                }
 
                 // Build install command
                 if (packages != null) {
                     try {
                         if (packages.length > 0) {
-                            String inst = manager.isSearch ? "search" : "install";
+                            String inst;
+                            if (manager.isSearch) {
+                                inst = "search";
+                            } else if (manager.isUpgrade) {
+                                inst = "upgrade";
+                            } else {
+                                inst = "install";
+                            }
                             command = new StringBuilder(String.format("apt %s ", inst));
                             for (String pack : packages) {
                                 command.append(pack).append(' ');
@@ -72,8 +74,5 @@ public class PacCommandRunner {
 
         }
 
-        else if (false) {
-
-        }
     }
 }

@@ -49,8 +49,9 @@ public class Main {
                     manager.setStatus(PacManager.PacStatus.REMOVE);
                     break;
                 } case "Q": {
+                    //TODO: Implement Query
                     manager.setStatus(PacManager.PacStatus.QUERY);
-                    break;
+                    throw new RuntimeException("TODO");
                 } case "T": {
                     //TODO: Add Dependency Test options
                     throw new RuntimeException("TODO");
@@ -61,7 +62,6 @@ public class Main {
                     manager.doLocal();
                 } case "V": {
                     System.out.println(vOutput);
-                    x = 126;
                     return;
                 } case "s": {
                     manager.doSearch();

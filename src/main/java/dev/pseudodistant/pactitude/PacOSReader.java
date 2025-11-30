@@ -29,7 +29,7 @@ public class PacOSReader {
                     if(data.contains("arch")) {
                         currentOS = OS.ARCH;
                         break;
-                    } else if (data.contains("debian")) {
+                    } else if (data.contains("debian") || data.contains("ubuntu")) {
                         currentOS = OS.DEBIAN;
                         break;
                     } else {
